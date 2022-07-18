@@ -12,7 +12,7 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode((1200,800))
         pygame.display.set_caption("Alien Invasion")
 
-        #Set background color
+        #Set background color -- initializes the background color in bg_color variable
         self.bg_color= (230,230,230)
 
     def run_game(self):
@@ -24,7 +24,8 @@ class AlienInvasion:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                self.screen.fill(self.bg_color)
+                self.screen.fill(self.bg_color) # uses the screen object that contains the pygame display 
+                # class to call the fill method to background fill
             pygame.display.flip()
 
 if __name__ == '__main__':
