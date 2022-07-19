@@ -27,8 +27,11 @@ class AlienInvasion:
                 if event.type == pygame.QUIT:
                     sys.exit()
                 elif event.type == pygame.KEYDOWN:
-                    if event.type == pygame.K_RIGHT:
-                        self.ship.rect.x += 1
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = True
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
 
 
     def _update_screen(self):
@@ -44,6 +47,7 @@ class AlienInvasion:
             # Watch for keyboard and mouse events
 
             self._check_events()
+            self.ship.update()
             self._update_screen()
                       
             
