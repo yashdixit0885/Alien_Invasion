@@ -1,0 +1,184 @@
+Release 1 Notes
+
+	- Pygame is a Python package that is used in building 2D games in Python. It is a collection of fun, powerful modules that manage graphics, animation, and even sound, making it easier for you to build sophisticated games.
+
+	- Utilizing version control for this project. I've created a folder called Alien_Invasion under Python in C drive. The repo is attached to this folder.
+
+Planning your project
+
+	- When you're building a large project, it's important to prepare a plan before you begin writing the code.
+
+	- Writing a project context is important- 
+
+In Alien Invasion, the player controls a rocket ship that appears at the bottom center of the screen. The player can move the ship right and left using the arrow keys and shoot bullets using the spacebar. When the game begins, a fleet of aliens fills the sky and moves across and down the screen. The player shoots and destroys the aliens. If the player shoots all the aliens, a new fleet appears that moves faster than the previous fleet. If any alien hits the player's ship or reaches the bottom of the screen, the player loses a ship. If the player loses three ships, the game ends.
+
+Feature 1: We'll make a ship that can move right and left and fires bullets when the player presses the spacebar.
+
+Pre-Reqs:
+	- Install pygame through command prompt
+	- Check the version of python using command- python --version
+	- Check the version of pip using command- pip --version
+	- Upgrade them as needed
+	- Install pygame using command- pip install pygame
+
+Starting the game project
+
+	- We'll begin by building the game by creating an empty Pygame window. Later, we'll draw the game elements and user inputs.
+
+Follow the game code in Alien invasion folder and repo
+
+	- We import sys and pygame modules. The pygame module contains the functionality we need to make a game. Sys module is used to exit the game when the player quits.
+
+	- Alien Invasion starts as class called Alien Invasion. The init() method bsically initiaizes the pygame using the pygame.init() which runs some background settings to run the game properly. 
+	- The pygame. Display.set_mode() method is used to create a display window, on which we'll draw game's graphical elements. The argument (1200,800) is basically telling pygame to launch a screen which is 1200 pixels wide and 800 pixels high. We assign this to screen variable so it can be used across all methods in the class.
+
+	- Self. Screen is what is called a Surface. A surface in pygame is a part of the screen where a game element is displayed. Each element in the game is its own surface. The surface returned by display.set_mode() is the entire game window.
+
+	- The game is controlled by the run_game() method. This method contains the while loop that runs continually. The while loop contains an events loop that listens to events like mouse click, key presses etc. The for loop manages these events.
+
+	- When the user clicks on the window's close button, a pygame.QUIT event is triggered and system exits out of the screen
+
+	- Pygame.display.flip() tells Pygame to make the most recently drawn screen visible.During the game play, this continually updated the display to show the new positions of game elements and hides the old ones, creating an illusion of smooth movement.
+
+Creating a Settings class
+
+	- Having settings for the game at one place and then utilized across the game play helps reduce multiple changes.
+	- Ad game grows, we can always add more settings to this one file and then utilize that classes objects wherever needed
+
+
+
+class Settings:
+    """A class to store all settings for Alien Invasion"""
+    def __init__(self):
+        """Initialize game settings"""
+        #Screen settings
+        self.screen_width = 1200
+        self.screen_height = 800
+        self.bg_color = (230,230,230)
+
+
+Once you have this class, you can import this class from the file in the main alien_invasion.py file.
+
+For different kinds of images in your projects, you can use www.pixabay.com.
+
+	- Pygame uses .bmp or Bitmap
+
+
+Creating the Ship Class
+
+	- Pygame is efficient because it lets you treat all game elements like rectangles(rects), even if they're not exactly shaped like rectangles. Treating an element as a rectangle is efficient because rectangles are simple geometric shapes. We'll treat ship and the screen as rectangles in this class
+
+	- We first import Pygame and then initialize the class with __init__() method that takes the self reference and the current instance of AlienInvasion class. This will give Ship access to all the game resources defined in AlienInvasion class.
+
+
+
+import pygame
+class Ship:
+    """A class to manage ship"""
+    def __init__(self, ai_game):
+        """Initialize the ship and set its starting position"""
+        self.screen = ai_game.screen
+// We assign alien invasion class' screen to the screen of this class so all methods can use it
+
+        self.screen_rect = ai_game.screen.get_rect()
+// In this case, we extract the screen's rect attribute from get_rect() method and assign it to screen_rect. This will allow us to place the ship at the correct location based on the entire game's rectangular shape.
+
+        # Load the ship image and get its rect.
+        self. image = pygame.image.load('images/ship.bmp')
+// We place the image of ship in the image variable. This image is loaded using pygame image load() method.
+
+        self.rect = self.image.get_rect()
+// For the ship image in image instance, we extract the rectangular surface of the image from get_rect() method. We will use this to place ship against the screen rectangular area
+
+        #Start each new ship at the bottom center of the screen
+        self.rect.midbottom = self.screen_rect.midbottom
+// We have to position the ship to the bottom center of the screen. To do this you assign the midbottom of the screen's rectangular image to ship's rect. midbottom
+
+    def blitme(self):
+        """Draw the ship at its current location"""
+        self.screen.blit(self.image, self.rect)
+// screen.blit() method draws the ship at the location specified in the rect variable.
+
+
+Drawing the Ship to the Screen
+
+	- Once you have the ship class defined, you can go back to Alien Invasion class and create an object of Ship class and call the blitme() function
+
+
+import sys
+import pygame
+from settings import Settings
+from ship import Ship
+class AlienInvasion:
+    """Overall class to manage game assets and behavior"""
+    def __init__(self):
+        """Initialize the game, and create game resources"""
+        pygame.init()
+        self.settings = Settings()
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_width))
+        pygame.display.set_caption("Alien Invasion")
+        self.ship = Ship(self)// Call the Ship class with self which is AlienInvasion's current instance. 
+        #Set background color -- initializes the background color in bg_color variable
+        
+    def run_game(self):
+        """Start the main loop of the game"""
+        while True:
+            # Watch for keyboard and mouse events
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                self.screen.fill(self.settings.bg_color)
+                self.ship.blitme()// we use the ship instance to call blitme in the event loop to draw the ship
+            pygame.display.flip()
+if __name__ == '__main__':
+    ai = AlienInvasion()
+    ai.run_game()
+
+Refactoring Code
+
+	- Refactoring simplifies the structure of the code you've already written, making it easier to build on.
+	- We'll break the run_game() method in Alien Invasion class into two helper methods.
+	- A helper method  does work inside a class but isn't meant to be called through an instance. 
+
+Rule of thumb: Any code within a method of a class that does not get invoked through class's instance can be moved to be its own method through a helper class.
+
+
+Piloting the Ship
+
+	- Now that we have the ship in place, we need to give an ability to move the ship left or right based on keyboard left or right arrow key presses.
+
+Responding to a key press
+
+	- Whenever the player presses a key, that keypress is registered in Pygame as an event. Each event is picked up by the pygame.event.get() method. We need to specify in our _check_events() method what kind of events we want the game to check for.
+
+	- Each keypress is registered as a KEYDOWN event. When Pygame detects a keydown event, we need to check if the keypress was the one that triggered the action. So if the user presses the right arrow key then we need to update the rect.x of the ship by 1 to move to the right.
+
+elif event.type == pygame.KEYDOWN:// checks whether a key is pressed down or not
+                    if event.key == pygame.K_RIGHT:// checks whether it is the right arrow key
+                        self.ship.rect.x += 1// increments the position of the ship by 1
+
+
+	- To allow the player to continuously moving the ship to the right when the arrow key is pressed, we'll need to use the KEYUP attribute to check when the key is released
+
+	- We'll use KEYUP and KEYDOWN events together with a flag called moving_right to implement continuous motion.
+
+Code changes will be viewed in the code files directly. List filename.py when you do that.
+
+Currently the ship only moves 1 pixel per cycle. We can give some finer control to the ship by adding ship_speed attribute to settings class:
+
+We add ship_speed in Ship class. We create a settings object for the ai_game and assign that to local object within ship. We then add take ship's rect.x value and float it and assign it to another variable x
+
+We then update this x variable in the update method by the ship_speed accessed through settings object and voila!
+
+Limiting the range of ship:
+
+- At this point the ship moves off the edge of the screen and we need to limit it to stop at the end of the game screen.
+
+- Let's update the Ship's update method so this stops at the edge of the screen
+
+- the rect method has an attribute from right and left. Right is the rightmost of the image. We can use this to limit where the object can go against the screen
+
+- We compare the right most x-coordinate of the ship against the screen's right most coordinate to evaluate if ship is at the end and then it doesn't go further. Similarly if it's left
+attribute is higher than 0 then it's within the edge
+
+
