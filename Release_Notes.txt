@@ -181,4 +181,7 @@ Limiting the range of ship:
 - We compare the right most x-coordinate of the ship against the screen's right most coordinate to evaluate if ship is at the end and then it doesn't go further. Similarly if it's left
 attribute is higher than 0 then it's within the edge
 
+To update the keypress for quitting the game, you can add a key event which checks for key press of q and once it does, it exits the game
+
+Run the game full_screen:
 
