@@ -9,7 +9,7 @@ class Settings:
 
         self.screen_width = 550
         self.screen_height = 420
-        self.bg_color = (230,230,230)
+        self.bg_color = (255,255,255)
 
         #Ship Settings
 
