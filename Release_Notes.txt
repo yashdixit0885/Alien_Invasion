@@ -183,5 +183,17 @@ attribute is higher than 0 then it's within the edge
 
 To update the keypress for quitting the game, you can add a key event which checks for key press of q and once it does, it exits the game
 
-Run the game full_screen:
+Shooting Bullets:
+
+- Code that fires bullets is represented by a small rectangle and a player pressing the spacebar
+- Bullets will move straight up and then dissapear off the screen. 
+- We start by adding the settings of bullet like speed, width and height and color of the bullet in the settings.py file
+
+Bullet Class:
+
+- The bullet class inherits from Sprite, which we import from the pygame.sprite module.
+- Please review specific text in the book
+
+
+
 
