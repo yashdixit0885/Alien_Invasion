@@ -60,8 +60,19 @@ class AlienInvasion:
             self.ship.moving_down = False
 
     def _fire_bullet(self):
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets)< self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """Update position of bullets and get rid of old bullets"""
+        self.bullets.update()
+
+            # Get rid of old bullets
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <=0:
+                self.bullets.remove(bullet)
+         # print(len(self.bullets))
 
 
 
@@ -81,7 +92,7 @@ class AlienInvasion:
 
             self._check_events()
             self.ship.update()
-            self.bullets.update()
+            self._update_bullets()
             self._update_screen()
                       
             
