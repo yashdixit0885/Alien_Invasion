@@ -197,3 +197,32 @@ Bullet Class:
 
 
 
+Building aliens
+
+- Second part of the project is to add one alien at the top of the screen and then a fleet of aliens that will move sideways and down. Those that are hit with bullets dissapear and those
+that hit the ship cause the ship to die and needs to reappear.
+
+Objectives of phase 2 of development:
+
+- Examine the exisiting code for any Refactoring
+- Add a single alien at the top with appropriate spacing around it
+- Use the spacing around the first alien to overall screen to identify how many aliens can fit the screen and then write a for loop to add those aliens
+- Make the fleet move sideways and down until the entire fleet is shot down, an alien hits the ship or the fleet touches the ground. If the entire fleet is shot down, we create a new 
+fleet. If an alien hits the ship or the fleet touches the ground, we'll destroy the ship and create a new fleet.
+- Limit the number of ships a player can use and end the game once all the ships are used.
+
+POINT TO REMEMBER: Refactoring code as you go is important but you can always refactor before you start a new phase or features for the development
+
+Alien's behavior will be very similar like a ship class where we'll position the alien a certain point on the screen and then use a loop to control its movement
+
+Review book for additional details on the alien code
+
+available horizontal space for the fleet of aliens is calculated by = total screen width - 2* width of 1 alien
+
+Also, each alien needs to have some space between each other and so you need to calculate that by using the formula- total available space/ width of 2 aliens and leave any remainder off
+
+
+
+
+
+

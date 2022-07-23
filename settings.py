@@ -7,8 +7,8 @@ class Settings:
 
         #Screen settings
 
-        self.screen_width = 550
-        self.screen_height = 420
+        self.screen_width = 900
+        self.screen_height = 900
         self.bg_color = (255,255,255)
 
         #Ship Settings
@@ -21,4 +21,7 @@ class Settings:
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (60,60,60)
-        self.bullets_allowed = 2
+        self.bullets_allowed = 5
+
+        
+
