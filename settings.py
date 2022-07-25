@@ -30,5 +30,5 @@ class Settings:
         #fleet_direction of 1 represents right; -1 represents left
         self.fleet_direction = 1
 
-        
+
 

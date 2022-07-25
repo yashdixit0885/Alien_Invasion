@@ -227,6 +227,12 @@ available_space_y = setting.screen_height - (3* alien_height) - ship_height
 
 number of rows= available_space_y // 2*alien_height
 
+To shoot aliens, we need to check for collision between bullets and the aliens. In game programming, collisions happen when game elements overlap. 
+
+sprite.groupcollide() function is used to measure the overlap between game elements. It compares the rects of each element in one group with the rects of each element in another group.
+
+In this case, it compares each bullet's rect with each alien's rect and returns a dictionary containing the bullets and aliens that have collided.Each key in the dictionary will be a bullet, and the 
+corresponding value will be the alien that was hit.
 
 
 
