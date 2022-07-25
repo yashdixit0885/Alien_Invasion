@@ -221,7 +221,11 @@ available horizontal space for the fleet of aliens is calculated by = total scre
 
 Also, each alien needs to have some space between each other and so you need to calculate that by using the formula- total available space/ width of 2 aliens and leave any remainder off
 
+For calculating the number of rows of the aliens, you need to have height of each alien, height of ship from the bottom and 2 heights of alien to give players some room to start shooting these aliens
 
+available_space_y = setting.screen_height - (3* alien_height) - ship_height
+
+number of rows= available_space_y // 2*alien_height
 
 
 
